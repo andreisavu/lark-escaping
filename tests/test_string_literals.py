@@ -7,6 +7,9 @@ class MyEvaluator(Transformer):
         # Remove the surrounding quotes and unescape
         return s[0][1:-1].encode().decode('unicode_escape')
     
+    def collection_name(self, s):
+        return s[0]
+
     def get_expression(self, items):
         # Extract the collection name and the key from the get_expression
         collection_name, key = items
