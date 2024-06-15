@@ -1,13 +1,9 @@
 import pytest
 from lark import Lark, Transformer, v_args
 
-grammar = """
-start: expression
-expression: string_literal
-          | expression "+" expression -> concat
-string_literal: ESCAPED_STRING
-%import common.ESCAPED_STRING
-"""
+# Rather than defining the grammar inline, read it from the grammar.lark file in the root folder
+with open('../grammar.lark') as file:
+    grammar = file.read()
 
 class EvalConcat(Transformer):
     @v_args(inline=True)
