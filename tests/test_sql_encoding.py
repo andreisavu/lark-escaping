@@ -56,7 +56,7 @@ def test_pypika_encoding_with_arbitrary_unicode():
     )
     
     # Expected SQL query
-    expected_query = "SELECT * FROM \"users\" WHERE \"emoji\"='Unicode Character \\u1234'"
+    expected_query = "SELECT * FROM \"users\" WHERE \"emoji\"='Unicode Character \u1234'"
     
     # Assert the generated SQL query matches the expected output
     assert str(query) == expected_query
