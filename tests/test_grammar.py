@@ -1,8 +1,10 @@
+import os
 import pytest
 from lark import Lark, Transformer, v_args
 
-# Rather than defining the grammar inline, read it from the grammar.lark file in the root folder
-with open('../grammar.lark') as file:
+# Correct the file path to locate grammar.lark within the project structure
+grammar_file_path = os.path.join(os.path.dirname(__file__), '..', 'grammar.lark')
+with open(grammar_file_path) as file:
     grammar = file.read()
 
 class EvalConcat(Transformer):
