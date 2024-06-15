@@ -16,7 +16,13 @@ def test_string_literal_parsing():
         ('"hello"', "hello"),
         ('"hello\\nworld"', "hello\nworld"),
         ('"hello\\tworld"', "hello\tworld"),
-        ('"hello\\"world\\""', 'hello"world"')
+        ('"hello\\"world\\""', 'hello"world"'),
+        ("'hello'", "hello"),  # Single quotes test case
+        ("'hello\\'world\\''", "hello'world'"),  # Single quotes with escaped single quote
+        ('"hello\\\'world\\\'"', "hello\'world\'"),  # Double quotes with escaped single quote
+        ("'hello\\\"world\\\"'", 'hello"world"'),  # Single quotes with escaped double quote
+        ('"hello\'world\'"', "hello'world'"),  # Double quotes with single quote inside
+        ("'hello\"world\"'", 'hello"world"')  # Single quotes with double quote inside
     ]
     for test_string, expected in test_cases:
         result = parser.parse(test_string)
