@@ -10,6 +10,7 @@ with open(grammar_file_path) as file:
 class EvalConcat(Transformer):
     @v_args(inline=True)
     def string_literal(self, s):
+        # Assuming the input can be a regular or an escaped string literal
         return s[1:-1]  # strip quotes
 
     def concat(self, s1, s2):
@@ -21,12 +22,20 @@ def parser():
 
 def test_string_literal(parser):
     assert parser.parse('"hello"') == "hello"
+    # Testing escaped string literal
+    assert parser.parse(r'"hello\nworld"') == "hello\nworld"
 
 def test_concatenation(parser):
     assert parser.parse('"hello" + " world"') == "hello world"
+    # Testing concatenation with escaped string literals
+    assert parser.parse(r'"hello\n" + "world"') == "hello\nworld"
 
 def test_concatenation_with_multiple_terms(parser):
     assert parser.parse('"hello" + " beautiful" + " world"') == "hello beautiful world"
+    # Testing concatenation with multiple terms including escaped string literals
+    assert parser.parse(r'"hello\n" + "beautiful " + "world"') == "hello\nbeautiful world"
 
 def test_concatenation_with_spaces(parser):
     assert parser.parse('"hello" + " world"') == "hello world"
+    # Testing concatenation with spaces and escaped string literals
+    assert parser.parse(r'"hello " + "\nworld"') == "hello \nworld"
