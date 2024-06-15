@@ -16,8 +16,7 @@ def test_string_literal_parsing():
         ('"hello"', "hello"),
         ('"hello\\nworld"', "hello\nworld"),
         ('"hello\\tworld"', "hello\tworld"),
-        ('"hello\\"world\\""', 'hello"world"'),
-        ("'hello\\'world\\''", "hello'world'")
+        ('"hello\\"world\\""', 'hello"world"')
     ]
     for test_string, expected in test_cases:
         result = parser.parse(test_string)

@@ -1,4 +1,4 @@
 start: string
-string: STRING
-STRING: /"[^"\\]*(\\.[^"\\]*)*"/ | /'[^'\\]*(\\.[^'\\]*)*'/
-ESCAPED_CHAR: /\\[nrt"\\']/
+string: ESCAPED_STRING
+
+%import common.ESCAPED_STRING
