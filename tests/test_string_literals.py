@@ -9,4 +9,4 @@ def test_string_literal_parsing():
     parser = Lark(grammar, start='string')
     test_string = '"hello"'
     parse_tree = parser.parse(test_string)
-    assert str(parse_tree) == "Tree(string, [Token(STRING, '\"hello\"')])"
+    assert str(parse_tree) == "Tree('string', [Token('STRING', '\"hello\"')])"
