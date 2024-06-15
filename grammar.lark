@@ -1,5 +1,9 @@
-start: string
+start: string | get_expression
 string: ESCAPED_STRING | SINGLE_QUOTED_STRING
+get_expression: "GET(" collection_name "," string ")"
+
+collection_name: COLLECTION_NAME
+COLLECTION_NAME: /[A-Za-z_][A-Za-z0-9_]*/
 
 SINGLE_QUOTED_STRING: "'" _STRING_ESC_INNER "'"
 
