@@ -9,3 +9,6 @@ SINGLE_QUOTED_STRING: "'" _STRING_ESC_INNER "'"
 
 %import common.ESCAPED_STRING
 %import common._STRING_ESC_INNER
+
+%ignore WS
+WS: /[ \t\f\r\n]+/
