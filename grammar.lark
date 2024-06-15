@@ -1,3 +1,4 @@
 start: string
 string: STRING
-STRING: /"[^"]*"/ | /'[^']*'/
+STRING: /"[^"\\]*(\\.[^"\\]*)*"/ | /'[^'\\]*(\\.[^'\\]*)*'/
+ESCAPED_CHAR: /\\[nrt"\\']/

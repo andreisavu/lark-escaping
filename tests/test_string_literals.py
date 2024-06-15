@@ -1,12 +1,24 @@
 import pytest
-from lark import Lark
+from lark import Lark, Transformer
 import os
+
+class StringTransformer(Transformer):
+    def string(self, s):
+        # Remove the surrounding quotes and unescape
+        return s[0][1:-1].encode().decode('unicode_escape')
 
 def test_string_literal_parsing():
     grammar_path = os.path.join(os.path.dirname(__file__), '..', 'grammar.lark')
     with open(grammar_path) as grammar_file:
         grammar = grammar_file.read()
-    parser = Lark(grammar, start='string')
-    test_string = '"hello"'
-    parse_tree = parser.parse(test_string)
-    assert str(parse_tree) == "Tree('string', [Token('STRING', '\"hello\"')])"
+    parser = Lark(grammar, start='string', parser='lalr', transformer=StringTransformer())
+    test_cases = [
+        ('"hello"', "hello"),
+        ('"hello\\nworld"', "hello\nworld"),
+        ('"hello\\tworld"', "hello\tworld"),
+        ('"hello\\"world\\""', 'hello"world"'),
+        ("'hello\\'world\\''", "hello'world'")
+    ]
+    for test_string, expected in test_cases:
+        result = parser.parse(test_string)
+        assert result == expected
