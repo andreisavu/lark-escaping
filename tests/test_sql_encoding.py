@@ -45,3 +45,18 @@ def test_pypika_encoding_with_arbitrary_unicode():
     
     # Assert the generated SQL query matches the expected output
     assert str(query) == expected_query
+
+def test_pypika_encoding_with_new_lines():
+    # Define a table
+    users = Table('users')
+    
+    # Construct a query with string literals containing new lines
+    query = Query.from_(users).select('*').where(
+        Field('bio') == 'Line1\nLine2\nLine3'
+    )
+    
+    # Expected SQL query
+    expected_query = "SELECT * FROM \"users\" WHERE \"bio\"='Line1\nLine2\nLine3'"
+    
+    # Assert the generated SQL query matches the expected output
+    assert str(query) == expected_query
