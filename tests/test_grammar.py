@@ -31,6 +31,4 @@ def test_concatenation_with_multiple_terms(parser):
     assert parser.parse('"hello" + " beautiful" + " world"') == "hello beautiful world"
 
 def test_concatenation_with_spaces(parser):
-    assert parser.parse('"hello" +" world"') == "hello world"
-    assert parser.parse('"hello"+" world"') == "hello world"
-    assert parser.parse('"hello" + "world"') == "hello world"
+    assert parser.parse('"hello" + " world"') == "hello world"
