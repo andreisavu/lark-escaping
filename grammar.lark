@@ -1,4 +1,7 @@
 start: string
-string: ESCAPED_STRING
+string: ESCAPED_STRING | SINGLE_QUOTED_STRING
 
-ESCAPED_STRING: /"(?:\\.|[^"\\])*"/ | /'(?:\\.|[^'\\])*'/
+SINGLE_QUOTED_STRING: "'" _STRING_ESC_INNER "'"
+
+%import common.ESCAPED_STRING
+%import common._STRING_ESC_INNER
