@@ -30,7 +30,11 @@ def test_string_literal_parsing():
         ('"hello\\\'world\\\'"', "hello\'world\'"),  # Double quotes with escaped single quote
         ("'hello\\\"world\\\"'", 'hello"world"'),  # Single quotes with escaped double quote
         ('"hello\'world\'"', "hello'world'"),  # Double quotes with single quote inside
-        ("'hello\"world\"'", 'hello"world"')  # Single quotes with double quote inside
+        ("'hello\"world\"'", 'hello"world"'),  # Single quotes with double quote inside
+        ('"hello\\u1234world"', "hello\u1234world"),  # Double quotes with unicode character
+        ("'hello\\uABCDworld'", "hello\uABCDworld"),  # Single quotes with unicode character
+        ('"\\nNew\\tLine\\u1234"', "\nNew\tLine\u1234"),  # New line, tab, and unicode character
+        ("'\\nNew\\tLine\\uABCD'", "\nNew\tLine\uABCD")  # New line, tab, and unicode character in single quotes
     ]
     for test_string, expected in test_cases:
         result = parser.parse(test_string)
