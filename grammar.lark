@@ -4,3 +4,4 @@ expression: string_literal
           | expression "+" expression -> concat
 string_literal: ESCAPED_STRING
 %import common.ESCAPED_STRING
+%ignore " "  // Ignore spaces outside of string literals
