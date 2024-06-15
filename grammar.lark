@@ -1,4 +1,4 @@
 start: string
 string: ESCAPED_STRING
 
-%import common.ESCAPED_STRING
+ESCAPED_STRING: /"(?:\\.|[^"\\])*"/ | /'(?:\\.|[^'\\])*'/
