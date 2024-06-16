@@ -2,6 +2,11 @@ import pytest
 from lark import Lark, Transformer
 import os
 
+def load_grammar():
+    grammar_path = os.path.join(os.path.dirname(__file__), '..', 'grammar.lark')
+    with open(grammar_path) as grammar_file:
+        return grammar_file.read()
+
 class MyEvaluator(Transformer):
     def string(self, s):
         # Remove the surrounding quotes and unescape
@@ -16,9 +21,7 @@ class MyEvaluator(Transformer):
         return {'collection_name': collection_name, 'key': key}
 
 def test_string_literal_parsing():
-    grammar_path = os.path.join(os.path.dirname(__file__), '..', 'grammar.lark')
-    with open(grammar_path) as grammar_file:
-        grammar = grammar_file.read()
+    grammar = load_grammar()
     parser = Lark(grammar, start='string', parser='lalr', transformer=MyEvaluator())
     test_cases = [
         ('"hello"', "hello"),
@@ -41,9 +44,7 @@ def test_string_literal_parsing():
         assert result == expected
 
 def test_get_expression_parsing():
-    grammar_path = os.path.join(os.path.dirname(__file__), '..', 'grammar.lark')
-    with open(grammar_path) as grammar_file:
-        grammar = grammar_file.read()
+    grammar = load_grammar()
     parser = Lark(grammar, start='get_expression', parser='lalr', transformer=MyEvaluator())
     test_cases = [
         ('GET(User, "dsf223d")', {'collection_name': 'User', 'key': 'dsf223d'}),
