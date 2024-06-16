@@ -20,3 +20,27 @@ For detailed versions of dependencies, refer to `pyproject.toml`. Key dependenci
 ## Playground for Copilot Workspace
 
 This repository also serves as a playground for experimenting with GitHub's Copilot Workspace, exploring its capabilities in code generation and assistance.
+
+## Using Earthly for Building and Testing
+
+This project supports building and testing with Earthly, a build automation tool that allows for repeatable and isolated builds. To use Earthly, ensure you have it installed on your system.
+
+### Building the Project
+
+To build the project with Earthly, run the following command:
+
+```shell
+earthly +build
+```
+
+This command will install all necessary dependencies and prepare the project for testing or deployment.
+
+### Running Tests
+
+To run tests using Earthly, execute the following command:
+
+```shell
+earthly +test
+```
+
+This will run all configured tests in an isolated environment, ensuring consistency across different machines and environments.
