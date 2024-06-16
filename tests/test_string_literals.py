@@ -1,7 +1,7 @@
 import pytest
-from lark import Lark, Transformer
+from lark import Lark
 import os
-from mydsl import MyEvaluator
+from mydsl.evaluator import MyEvaluator
 
 def load_grammar():
     grammar_path = os.path.join(os.path.dirname(__file__), '..', 'grammar.lark')
