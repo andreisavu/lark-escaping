@@ -1,24 +1,12 @@
 import pytest
 from lark import Lark, Transformer
 import os
+from mydsl import MyEvaluator
 
 def load_grammar():
     grammar_path = os.path.join(os.path.dirname(__file__), '..', 'grammar.lark')
     with open(grammar_path) as grammar_file:
         return grammar_file.read()
-
-class MyEvaluator(Transformer):
-    def string(self, s):
-        # Remove the surrounding quotes and unescape
-        return s[0][1:-1].encode().decode('unicode_escape')
-    
-    def collection_name(self, s):
-        return s[0]
-
-    def get_expression(self, items):
-        # Extract the collection name and the key from the get_expression
-        collection_name, key = items
-        return {'collection_name': collection_name, 'key': key}
 
 def test_string_literal_parsing():
     grammar = load_grammar()
