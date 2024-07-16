@@ -7,7 +7,7 @@ class MyEvaluator(Transformer):
     """
     def string(self, s):
         # Remove the surrounding quotes and unescape
-        return s[0][1:-1].encode().decode('unicode_escape')
+        return s[0][1:-1].encode('latin1').decode('unicode_escape')
     
     def collection_name(self, s):
         return s[0]
