@@ -25,7 +25,8 @@ def test_string_literal_parsing():
         ('"hello\\u1234world"', "hello\u1234world"),  # Double quotes with unicode character
         ("'hello\\uABCDworld'", "hello\uABCDworld"),  # Single quotes with unicode character
         ('"\\nNew\\tLine\\u1234"', "\nNew\tLine\u1234"),  # New line, tab, and unicode character
-        ("'\\nNew\\tLine\\uABCD'", "\nNew\tLine\uABCD")  # New line, tab, and unicode character in single quotes
+        ("'\\nNew\\tLine\\uABCD'", "\nNew\tLine\uABCD"),  # New line, tab, and unicode character in single quotes
+        ('"extra letters ä, ö, ü."', "extra letters ä, ö, ü.")  # Test case for extra letters ä, ö, ü.
     ]
     for test_string, expected in test_cases:
         result = parser.parse(test_string)
